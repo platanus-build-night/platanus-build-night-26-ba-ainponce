@@ -146,6 +146,7 @@ export function SettingsModal({ open, language: currentLang, onClose, onSettings
                       </button>
                     ))}
                   </div>
+                  <p className="text-xs text-white/25 mt-1.5">{t('settings.levelAutoNote', lang)}</p>
                 </div>
 
                 {/* Topic */}

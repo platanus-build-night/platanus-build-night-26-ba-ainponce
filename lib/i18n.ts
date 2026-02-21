@@ -45,12 +45,17 @@ const translations: Record<Language, Record<string, string>> = {
     'practice.invalidApiKey': 'Invalid API key. Please check your settings.',
     'practice.failedFeedback': 'Failed to get feedback. Please try again.',
     'practice.couldNotPlay': 'Could not play audio.',
+    'practice.skipPhrase': 'New Phrase',
+    'practice.listenSlow': 'Listen Slow',
     'practice.endSession': 'End Session',
 
     // Feedback
     'feedback.youSaid': 'You said:',
     'feedback.tryAgain': 'Try Again',
     'feedback.continue': 'Continue',
+
+    'feedback.details': 'View Feedback',
+    'feedback.playRecording': 'Play My Recording',
 
     // Feedback Panel
     'feedbackPanel.wordAnalysis': 'Word-by-Word Analysis',
@@ -80,6 +85,12 @@ const translations: Record<Language, Record<string, string>> = {
     'progress.attempts': 'attempts',
     'progress.youSaid': 'You said:',
 
+    // Shortcuts
+    'shortcuts.title': 'Keyboard Shortcuts',
+    'shortcuts.spaceDesc': 'Start / Stop recording',
+    'shortcuts.enterDesc': 'Continue to next phrase',
+    'shortcuts.escapeDesc': 'Close modal',
+
     // Settings
     'settings.title': 'Settings',
     'settings.language': 'Language',
@@ -94,6 +105,15 @@ const translations: Record<Language, Record<string, string>> = {
     'level.beginner': 'Beginner',
     'level.intermediate': 'Intermediate',
     'level.advanced': 'Advanced',
+
+    // Word Tap
+    'feedbackPanel.tapToHear': 'Tap a word to hear it',
+
+    // Leveling
+    'level.levelUp': 'Level Up!',
+    'level.newTier': 'New tier:',
+    'progress.levelLabel': 'Level',
+    'settings.levelAutoNote': 'Auto-adjusts as you level up',
   },
 
   es: {
@@ -140,12 +160,17 @@ const translations: Record<Language, Record<string, string>> = {
     'practice.invalidApiKey': 'Clave API inválida. Revisa tu configuración.',
     'practice.failedFeedback': 'Error al obtener feedback. Intenta de nuevo.',
     'practice.couldNotPlay': 'No se pudo reproducir el audio.',
+    'practice.skipPhrase': 'Nueva Frase',
+    'practice.listenSlow': 'Escuchar Lento',
     'practice.endSession': 'Terminar Sesión',
 
     // Feedback
     'feedback.youSaid': 'Dijiste:',
     'feedback.tryAgain': 'Intentar de nuevo',
     'feedback.continue': 'Continuar',
+
+    'feedback.details': 'Ver Feedback',
+    'feedback.playRecording': 'Escuchar Mi Grabación',
 
     // Feedback Panel
     'feedbackPanel.wordAnalysis': 'Análisis Palabra por Palabra',
@@ -175,6 +200,12 @@ const translations: Record<Language, Record<string, string>> = {
     'progress.attempts': 'intentos',
     'progress.youSaid': 'Dijiste:',
 
+    // Shortcuts
+    'shortcuts.title': 'Atajos de Teclado',
+    'shortcuts.spaceDesc': 'Iniciar / Detener grabación',
+    'shortcuts.enterDesc': 'Continuar a siguiente frase',
+    'shortcuts.escapeDesc': 'Cerrar modal',
+
     // Settings
     'settings.title': 'Configuración',
     'settings.language': 'Idioma',
@@ -189,6 +220,15 @@ const translations: Record<Language, Record<string, string>> = {
     'level.beginner': 'Principiante',
     'level.intermediate': 'Intermedio',
     'level.advanced': 'Avanzado',
+
+    // Word Tap
+    'feedbackPanel.tapToHear': 'Toca una palabra para escucharla',
+
+    // Leveling
+    'level.levelUp': '!Subiste de Nivel!',
+    'level.newTier': 'Nuevo nivel:',
+    'progress.levelLabel': 'Nivel',
+    'settings.levelAutoNote': 'Se ajusta auto. al subir de nivel',
   },
 
   pt: {
@@ -235,12 +275,17 @@ const translations: Record<Language, Record<string, string>> = {
     'practice.invalidApiKey': 'Chave API inválida. Verifique suas configurações.',
     'practice.failedFeedback': 'Erro ao obter feedback. Tente novamente.',
     'practice.couldNotPlay': 'Não foi possível reproduzir o áudio.',
+    'practice.skipPhrase': 'Nova Frase',
+    'practice.listenSlow': 'Ouvir Devagar',
     'practice.endSession': 'Encerrar Sessão',
 
     // Feedback
     'feedback.youSaid': 'Você disse:',
     'feedback.tryAgain': 'Tentar novamente',
     'feedback.continue': 'Continuar',
+
+    'feedback.details': 'Ver Feedback',
+    'feedback.playRecording': 'Ouvir Minha Gravação',
 
     // Feedback Panel
     'feedbackPanel.wordAnalysis': 'Análise Palavra por Palavra',
@@ -270,6 +315,12 @@ const translations: Record<Language, Record<string, string>> = {
     'progress.attempts': 'tentativas',
     'progress.youSaid': 'Você disse:',
 
+    // Shortcuts
+    'shortcuts.title': 'Atalhos de Teclado',
+    'shortcuts.spaceDesc': 'Iniciar / Parar gravação',
+    'shortcuts.enterDesc': 'Continuar para a próxima frase',
+    'shortcuts.escapeDesc': 'Fechar modal',
+
     // Settings
     'settings.title': 'Configurações',
     'settings.language': 'Idioma',
@@ -284,6 +335,15 @@ const translations: Record<Language, Record<string, string>> = {
     'level.beginner': 'Iniciante',
     'level.intermediate': 'Intermediário',
     'level.advanced': 'Avançado',
+
+    // Word Tap
+    'feedbackPanel.tapToHear': 'Toque em uma palavra para ouvi-la',
+
+    // Leveling
+    'level.levelUp': 'Subiu de Nivel!',
+    'level.newTier': 'Novo nivel:',
+    'progress.levelLabel': 'Nivel',
+    'settings.levelAutoNote': 'Ajusta-se auto. ao subir de nivel',
   },
 };
 

@@ -10,12 +10,14 @@ import {
   TrendingUp,
   Clock,
   Trash2,
+  Zap,
 } from 'lucide-react';
 import { Tooltip } from '@/components/ui/tooltip';
 import { Badge } from '@/components/ui/badge';
 import { ProgressBar } from '@/components/ui/progress-bar';
 import { getProgress, clearProgress } from '@/lib/storage';
 import { getScoreColor } from '@/lib/scoring';
+import { xpProgress, tierForLevel } from '@/lib/leveling';
 import { t } from '@/lib/i18n';
 import type { UserProgress, Language } from '@/types';
 
@@ -81,6 +83,35 @@ export function ProgressModal({ open, language, onClose }: ProgressModalProps) {
                 </div>
               ) : (
                 <>
+                  {/* Level & XP */}
+                  {(() => {
+                    const xp = xpProgress(progress.xp);
+                    const tier = tierForLevel(progress.level);
+                    return (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-2xl p-4"
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <Zap className="w-5 h-5 text-yellow-400" />
+                            <span className="font-bold font-[family-name:var(--font-heading)] text-white">
+                              {t('progress.levelLabel', language)} {progress.level}
+                            </span>
+                          </div>
+                          <Badge variant="warning">
+                            {t(`level.${tier}`, language)}
+                          </Badge>
+                        </div>
+                        <ProgressBar value={xp.fraction * 100} color="#facc15" />
+                        <p className="text-xs text-white/30 mt-1.5 text-right tabular-nums">
+                          {xp.current} / {xp.needed} XP
+                        </p>
+                      </motion.div>
+                    );
+                  })()}
+
                   <div className="grid grid-cols-2 gap-3">
                     {[
                       { icon: Target, label: t('progress.totalAttempts', language), value: progress.totalAttempts, color: 'text-cyan-400' },

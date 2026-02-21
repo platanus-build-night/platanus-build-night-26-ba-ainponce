@@ -1,4 +1,5 @@
-import type { AttemptRecord, UserProgress, AppSettings, GeneratedPhrase } from '@/types';
+import type { AttemptRecord, UserProgress, AppSettings, GeneratedPhrase, SaveAttemptResult } from '@/types';
+import { calculateXpFromHistory, calculateLevel, tierForLevel } from '@/lib/leveling';
 
 const STORAGE_KEY = 'pronounce-app-progress';
 const SETTINGS_KEY = 'pronounce-app-settings';
@@ -12,6 +13,8 @@ function getDefaultProgress(): UserProgress {
     history: [],
     streakDays: 0,
     lastPracticeDate: null,
+    xp: 0,
+    level: 1,
   };
 }
 
@@ -20,14 +23,24 @@ export function getProgress(): UserProgress {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return getDefaultProgress();
-    return JSON.parse(raw) as UserProgress;
+    const progress = JSON.parse(raw) as UserProgress;
+    // Migration: calculate XP from history if missing
+    if (progress.xp === undefined || progress.xp === null) {
+      progress.xp = calculateXpFromHistory(progress.history);
+      progress.level = calculateLevel(progress.xp);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    }
+    return progress;
   } catch {
     return getDefaultProgress();
   }
 }
 
-export function saveAttempt(attempt: AttemptRecord): UserProgress {
+export function saveAttempt(attempt: AttemptRecord): SaveAttemptResult {
   const progress = getProgress();
+  const previousLevel = progress.level;
+  const previousTier = tierForLevel(previousLevel);
+
   progress.history.unshift(attempt);
   progress.totalAttempts += 1;
 
@@ -37,6 +50,10 @@ export function saveAttempt(attempt: AttemptRecord): UserProgress {
   if (attempt.score > progress.bestScore) {
     progress.bestScore = attempt.score;
   }
+
+  // XP & leveling
+  progress.xp += attempt.score;
+  progress.level = calculateLevel(progress.xp);
 
   const today = new Date().toISOString().split('T')[0];
   if (progress.lastPracticeDate) {
@@ -55,7 +72,19 @@ export function saveAttempt(attempt: AttemptRecord): UserProgress {
   progress.lastPracticeDate = today;
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  return progress;
+
+  let levelUp = null;
+  if (progress.level > previousLevel) {
+    const newTier = tierForLevel(progress.level);
+    levelUp = {
+      previousLevel,
+      newLevel: progress.level,
+      previousTier: previousTier !== newTier ? previousTier : null,
+      newTier: previousTier !== newTier ? newTier : null,
+    };
+  }
+
+  return { progress, levelUp };
 }
 
 export function clearProgress(): void {

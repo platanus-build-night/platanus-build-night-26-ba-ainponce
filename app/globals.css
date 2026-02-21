@@ -90,3 +90,60 @@ svg.lucide {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
 }
+
+/* Glass slider for speed control */
+input[type="range"].glass-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 16px;
+}
+
+input[type="range"].glass-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+input[type="range"].glass-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: -7px;
+  transition: background 0.2s;
+}
+
+input[type="range"].glass-slider::-webkit-slider-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+input[type="range"].glass-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+input[type="range"].glass-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s;
+}
+
+input[type="range"].glass-slider::-moz-range-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+input[type="range"].glass-slider:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

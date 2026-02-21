@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCcw, ArrowRight, X } from 'lucide-react';
+import { RotateCcw, ArrowRight, X, Headphones, Loader2 } from 'lucide-react';
 import { Tooltip } from '@/components/ui/tooltip';
 import { ScoreDisplay } from '@/components/score-display';
 import { FeedbackPanel } from '@/components/feedback-panel';
@@ -16,6 +16,10 @@ interface FeedbackModalProps {
   onRetry: () => void;
   onContinue: () => void;
   onClose: () => void;
+  userRecordingUrl?: string | null;
+  isPlayingUserRecording?: boolean;
+  onPlayUserRecording?: () => void;
+  onPlayWord?: (word: string) => Promise<void>;
 }
 
 export function FeedbackModal({
@@ -26,6 +30,10 @@ export function FeedbackModal({
   onRetry,
   onContinue,
   onClose,
+  userRecordingUrl,
+  isPlayingUserRecording,
+  onPlayUserRecording,
+  onPlayWord,
 }: FeedbackModalProps) {
   if (!result) return null;
 
@@ -68,7 +76,7 @@ export function FeedbackModal({
                 <p className="text-white">{userTranscription}</p>
               </div>
 
-              <FeedbackPanel result={result} language={language} />
+              <FeedbackPanel result={result} language={language} onPlayWord={onPlayWord} />
 
               <div className="flex gap-3 justify-center pb-4">
                 <Tooltip label={t('feedback.tryAgain', language)} position="top">
@@ -80,6 +88,23 @@ export function FeedbackModal({
                     <RotateCcw className="w-5 h-5" />
                   </button>
                 </Tooltip>
+
+                {userRecordingUrl && onPlayUserRecording && (
+                  <Tooltip label={t('feedback.playRecording', language)} position="top">
+                    <button
+                      onClick={onPlayUserRecording}
+                      disabled={isPlayingUserRecording}
+                      className="w-12 h-12 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-sm flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.08] disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-300"
+                      aria-label={t('feedback.playRecording', language)}
+                    >
+                      {isPlayingUserRecording ? (
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                      ) : (
+                        <Headphones className="w-5 h-5" />
+                      )}
+                    </button>
+                  </Tooltip>
+                )}
 
                 <Tooltip label={t('feedback.continue', language)} position="top">
                   <button

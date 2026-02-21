@@ -45,6 +45,20 @@ export interface UserProgress {
   history: AttemptRecord[];
   streakDays: number;
   lastPracticeDate: string | null;
+  xp: number;
+  level: number;
+}
+
+export interface LevelUpEvent {
+  previousLevel: number;
+  newLevel: number;
+  previousTier: Level | null;
+  newTier: Level | null;
+}
+
+export interface SaveAttemptResult {
+  progress: UserProgress;
+  levelUp: LevelUpEvent | null;
 }
 
 export interface ScoringRequest {
@@ -77,4 +91,4 @@ export interface ConversationContext {
 
 export type AppView = 'onboarding' | 'practice';
 export type OrbState = 'idle' | 'listening' | 'processing' | 'score';
-export type ModalState = 'none' | 'feedback' | 'progress' | 'settings';
+export type ModalState = 'none' | 'feedback' | 'progress' | 'settings' | 'shortcuts';

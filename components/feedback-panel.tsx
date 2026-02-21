@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Target, MessageCircle, Lightbulb, Star } from 'lucide-react';
+import { Target, MessageCircle, Lightbulb, Star, Volume2, Loader2 } from 'lucide-react';
 import { t } from '@/lib/i18n';
 import type { ScoringResult, Language } from '@/types';
 import { getScoreColor } from '@/lib/scoring';
@@ -9,9 +10,21 @@ import { getScoreColor } from '@/lib/scoring';
 interface FeedbackPanelProps {
   result: ScoringResult;
   language?: Language;
+  onPlayWord?: (word: string) => Promise<void>;
 }
 
-export function FeedbackPanel({ result, language = 'en' }: FeedbackPanelProps) {
+export function FeedbackPanel({ result, language = 'en', onPlayWord }: FeedbackPanelProps) {
+  const [playingIndex, setPlayingIndex] = useState<number | null>(null);
+
+  const handleWordTap = async (word: string, index: number) => {
+    if (!onPlayWord || playingIndex !== null) return;
+    setPlayingIndex(index);
+    try {
+      await onPlayWord(word);
+    } finally {
+      setPlayingIndex(null);
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,7 +58,12 @@ export function FeedbackPanel({ result, language = 'en' }: FeedbackPanelProps) {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 + i * 0.1 }}
-              className="bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-xl p-3 flex items-start gap-3"
+              onClick={() => handleWordTap(word.target, i)}
+              className={`bg-white/[0.04] backdrop-blur-sm border rounded-xl p-3 flex items-start gap-3 transition-all duration-200 ${
+                playingIndex === i
+                  ? 'border-cyan-400/40 bg-cyan-400/[0.06]'
+                  : 'border-white/10'
+              } ${onPlayWord ? 'cursor-pointer hover:bg-white/[0.06]' : ''}`}
             >
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5"
@@ -77,6 +95,15 @@ export function FeedbackPanel({ result, language = 'en' }: FeedbackPanelProps) {
                   {word.tip}
                 </p>
               </div>
+              {onPlayWord && (
+                <div className="shrink-0 mt-0.5">
+                  {playingIndex === i ? (
+                    <Loader2 className="w-4 h-4 text-cyan-400 animate-spin" />
+                  ) : (
+                    <Volume2 className="w-4 h-4 text-white/20" />
+                  )}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>

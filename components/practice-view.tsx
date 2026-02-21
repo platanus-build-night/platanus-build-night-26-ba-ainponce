@@ -589,9 +589,7 @@ export function PracticeView({ settings: initialSettings, onEndSession }: Practi
         </Tooltip>
 
         <div className="flex items-center gap-2">
-          <span className="font-bold font-[family-name:var(--font-heading)] text-white/60 text-sm">
-            PronounceAI
-          </span>
+          <img src="/logo.png" alt="PronounceAI" className="h-6 w-auto opacity-60" />
           <LevelBadge />
         </div>
 

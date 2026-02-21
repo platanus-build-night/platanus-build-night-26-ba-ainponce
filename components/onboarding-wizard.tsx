@@ -112,22 +112,14 @@ export function OnboardingWizard({ onComplete }: OnboardingWizardProps) {
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="text-center"
             >
-              <motion.h1
+              <motion.img
+                src="/logo.png"
+                alt="PronounceAI"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-heading)] text-white mb-3"
-              >
-                PronounceAI
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className="text-white/40 text-sm"
-              >
-                Master your pronunciation with AI
-              </motion.p>
+                className="h-52 md:h-72 w-auto mx-auto"
+              />
             </motion.div>
           )}
 

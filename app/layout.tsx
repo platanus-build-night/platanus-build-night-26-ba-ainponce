@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PronounceAI - Practice Your Pronunciation",
+  title: "PronounceAI - Asistente de Práctica Fonoaudiológica",
   description:
-    "AI-powered pronunciation practice with real-time feedback. Improve your English and Portuguese pronunciation with Claude AI coaching.",
+    "Práctica fonoaudiológica con IA. Feedback palabra por palabra en tiempo real para niños con trastornos del habla.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
